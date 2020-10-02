@@ -1,1 +1,9 @@
 NOTES
+
+Areas to review/improve:
+- Interact with DB via the command line and rake
+- Use tux to test our app 
+- Nested Forms!
+- Securing Passwords & User Authentication
+- Mechanics of Sessions
+- CRUD architecture in Controllers

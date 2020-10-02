@@ -96,7 +96,7 @@ PLAYERS = [
     ["A.A. Ron Rodgers", "Cal"]
 ]
 
-PLAYERS.map.with_index do |player, i|
+PLAYERS.each.with_index do |player, i|
     Player.create({
         name: player[0],
         school: player[1],
@@ -130,3 +130,30 @@ LEAGUE_MEMBERS = [
     {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", ssn: rando.rand(99)},
     {name: "Dirty Randy", username: "dirty_randy", password: "dildos", ssn: rando.rand(99)}
 ]
+
+LEAGUE_MEMBERS.each do |user|
+    User.create(user)
+end
+
+
+TEAMS = [
+    {name: "Buffalo Wings"},
+    {name: "Buggery Bandits"},
+    {name: "Cheetos"},
+    {name: "Cowardly Lions"},
+    {name: "Dandy Fishies"},
+    {name: "Grumpy Cats"},
+    {name: "Heismanbergs"},
+    {name: "Hipster Kitties"},
+    {name: "Karens"},
+    {name: "Prancy Horsies"},
+    {name: "Punch Lines"},
+    {name: "Silly Pussies"},
+    {name: "Sith Lords"},
+    {name: "Trophy Pelts"},
+    {name: "Trump Dolphins"}
+]
+
+TEAMS.each do |team|
+    Team.create(team)
+end

@@ -5,7 +5,7 @@ class CreateUsersTable < ActiveRecord::Migration[5.2]
       t.string :username
       t.string :password
       t.string :photo_url
-      t.string :social_security_number
+      t.string :ssn
       t.string :credit_card_info
       t.string :deepest_darkest_secret
       t.string :what_you_want_for_christmas
