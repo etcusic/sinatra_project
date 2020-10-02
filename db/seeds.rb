@@ -96,16 +96,6 @@ PLAYERS = [
     ["A.A. Ron Rodgers", "Cal"]
 ]
 
-PLAYERS.each.with_index do |player, i|
-    Player.create({
-        name: player[0],
-        school: player[1],
-        position: assign_position(i),
-        active: false
-        team_id: nil
-    })
-end
-
 def assign_position(i)
     if i >= 0 || i <= 11
         "QB"
@@ -116,6 +106,14 @@ def assign_position(i)
     else
         "WR"
     end
+end
+
+PLAYERS.each.with_index do |player, i|
+    Player.create({
+        name: player[0],
+        school: player[1],
+        position: assign_position(i)
+    })
 end
 
 rando = Random.new # call a new with rando.rand(99)

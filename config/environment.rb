@@ -9,7 +9,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 # configure :development do
-  # set :database, 'sqlite3:db/teams.db'
+  # set :database, 'sqlite3:db/the_league.db'
 # end
 
 require './app/controllers/application_controller'

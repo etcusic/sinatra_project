@@ -5,7 +5,7 @@ class CreatePlayersTable < ActiveRecord::Migration[5.2]
       t.string :school
       t.string :position
       t.integer :team_id
-      t.active :boolean
+      t.boolean :active
     end
   end
 end
