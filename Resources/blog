@@ -1,0 +1,14 @@
+BLOG   (ideas & notes)
+
+Memoization: 
+- Or-Equals Operator (||=) 
+    - value ||= expensive_method(123)
+    - ### logically equivalent to ###
+    - value = (value || expensive_method(123))
+
+- Put simply, memoization is saving a method's return value so it does not have to be recomputed each time. 
+    As with all caching, you are effectively trading memory for time (i.e. you give up the memory required to store the value, 
+    but you save the time required to process the method).
+
+Links:
+- https://www.honeybadger.io/blog/ruby-rails-memoization/
