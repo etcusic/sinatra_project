@@ -1,4 +1,4 @@
-ARRAY = [
+PLAYERS = [
     ["D’Marcus Williums", "University of Georgia"],
     ["T.J. Juckson", "Wayne State University"],
     ["T’Variuness King", "Merrimack College"],
@@ -96,16 +96,37 @@ ARRAY = [
     ["A.A. Ron Rodgers", "Cal"]
 ]
 
-ARRAY.map.with_index do |player, i|
-    if i >= 0 || i <= 9
-        player << "QB"
-    elsif i >= 10 || i <= 19
-        player << "K"
-    elsif i >= 20 || i <= 38
-        player << "TE"
-    elsif i >= 39 || i < = 66
-        player << "RB"
+PLAYERS.map.with_index do |player, i|
+    Player.create({
+        name: player[0],
+        school: player[1],
+        position: assign_position(i),
+        active: false
+        team_id: nil
+    })
+end
+
+def assign_position(i)
+    if i >= 0 || i <= 11
+        "QB"
+    elsif i >= 12 || i <= 23
+        "K"
+    elsif i >= 24 || i <= 58
+        "RB"
     else
-        player << "WR"
+        "WR"
     end
 end
+
+rando = Random.new # call a new with rando.rand(99)
+
+LEAGUE_MEMBERS = [
+    {name: "Taco", username: "taco", password: "thepasswordistaco", ssn: rando.rand(99)},
+    {name: "Jenny", username: "jenny", password: "beanflick", ssn: rando.rand(99)},
+    {name: "Pete", username: "pete", password: "itisdecided", ssn: rando.rand(99)},
+    {name: "Kevin", username: "kevin", password: "yobogoya", ssn: rando.rand(99)},
+    {name: "Rafi", username: "rafi", password: "rafibomb", ssn: rando.rand(99)},
+    {name: "Ruxin", username: "ruxin", password: "collusion", ssn: rando.rand(99)},
+    {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", ssn: rando.rand(99)},
+    {name: "Dirty Randy", username: "dirty_randy", password: "dildos", ssn: rando.rand(99)}
+]
