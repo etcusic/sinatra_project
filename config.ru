@@ -5,5 +5,7 @@ require './config/environment'
 # end
 
 use Rack::MethodOverride
-
+use SessionsController
+use UsersController
+use TeamsController
 run ApplicationController
