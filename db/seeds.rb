@@ -135,21 +135,21 @@ end
 
 
 TEAMS = [
-    {name: "Buffalo Wings"},
-    {name: "Buggery Bandits"},
-    {name: "Cheetos"},
-    {name: "Cowardly Lions"},
-    {name: "Dandy Fishies"},
-    {name: "Grumpy Cats"},
-    {name: "Heismanbergs"},
-    {name: "Hipster Kitties"},
-    {name: "Karens"},
-    {name: "Prancy Horsies"},
-    {name: "Punch Lines"},
-    {name: "Silly Pussies"},
-    {name: "Sith Lords"},
-    {name: "Trophy Pelts"},
-    {name: "Trump Dolphins"}
+    {name: "Buffalo Wings", logo: "/logos/buffalo_wings.jpg"},
+    {name: "Buggery Bandits", logo: "/logos/buggery_bandits.png"},
+    {name: "Cheetos", logo: "/logos/cheetos.jpeg"},
+    {name: "Cowardly Lions", logo: "/logos/cowardly_lions.jpeg"},
+    {name: "Dandy Fishies", logo: "/logos/dandy_fishies.png"},
+    {name: "Grumpy Cats", logo: "/logos/grumpy_cats.png"},
+    {name: "Heismanbergs", logo: "/logos/heismanbergs.png"},
+    {name: "Hipster Kitties", logo: "/logos/hipster_kitties.jpg"},
+    {name: "Karens", logo: "/logos/karens.jpg"},
+    {name: "Prancy Horsies", logo: "/logos/prancy_horsies.png"},
+    {name: "Punch Lines", logo: "/logos/punch_lines.png"},
+    {name: "Silly Pussies", logo: "/logos/silly_pussies.png"},
+    {name: "Sith Lords", logo: "/logos/sith_lords.jpg"},
+    {name: "Trophy Pelts", logo: "/logos/trophy_pelts.jpeg"},
+    {name: "Trump Dolphins", logo: "/logos/trump_dolphins.jpeg"}
 ]
 
 TEAMS.each do |team|
