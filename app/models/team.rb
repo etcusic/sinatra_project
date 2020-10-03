@@ -1,5 +1,8 @@
 class Team < ActiveRecord::Base
-
+    
+    belongs_to :team
+    has_many :players
+    
     def self.under_capacity?
         self.all.count < 6
     end
