@@ -2,23 +2,24 @@ require_relative 'sessions_controller.rb'
 
 class SessionsController < ApplicationController
 
-    get '/sessions/login' do
+    get '/login' do
         erb :'sessions/login'
     end
 
     post '/login' do
-        user = User.find_by(email: params[:email])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect '/users/homepage'
-        else 
-            # Need to develop errors for redirection
-            redirect '/errors'
+        # binding.pry
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            redirect "/users/#{@user.id}"
+        # Need to develop errors for redirection
+        # else   
+            # redirect '/errors'
         end
     end
 
     get '/logout' do
         session.clear
-        redirect '/landing_page'
+        redirect '/'
     end
 end

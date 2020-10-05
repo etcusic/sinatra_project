@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
-    erb :landing_page
+    erb :the_league
   end
 
   helpers do
@@ -26,7 +26,7 @@ class ApplicationController < Sinatra::Base
 
     def redirect_if_not_logged_in
       if !logged_in?
-        erb :landing_page
+        erb :the_league
       end
     end
 
