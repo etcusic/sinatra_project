@@ -1,1 +1,12 @@
 <h1>Welcome to your homepage <%= @user.name %>!</h1>
+<br>
+
+<h2><%= @user.name %> teams:</h2>
+<% @user_teams.each do |team| %>
+    <a href="/teams/<%= team.id %>"><h3><%= team.location %> <%= team.name %></h3></a>
+<% end %>
+<br><br>
+
+<h3>Create new team here: <a href="/teams/new"><button>CREATE</button></a></h3>
+
+<a href="/users/<%= @user.id %>/edit"><p>Edit Info</p></a>
