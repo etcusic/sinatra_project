@@ -4,35 +4,26 @@ class Team < ActiveRecord::Base
     has_many :players
     
     def self.under_capacity?
-        self.all.count < 6
+        self.all.count <= 12
     end
 
-    def self.roster_guidelines
+    def self.roster_construction
         # maximum number of players from each position allowed on a team
         roster = {
-            "QB" => 2,
-            "RB" => 6,
-            "WR" => 6,
-            "K" => 2
+            "QB" => 1,
+            "RB" => 2,
+            "WR" => 2,
+            "K" => 1
         }
     end
 
     # Does this belong here??
     def self.roster_setup
-        roster = ["QB", "RB", "RB", "WR", "WR", "FLEX", "K"]
+        roster = ["QB", "RB", "RB", "WR", "WR", "K"]
     end
 
     def roster_array
         roster = Player.all.select{|player| player.team_id == self.id}
-    end
-
-    def roster_under_capacity?
-        self.roster_array.count < 12
-    end
-
-    def position_under_capacity?(pos)
-        position_count = self.roster_array.select{| player | player.position == pos} .count
-        position_count < Team.roster_guidelines["#{pos}"] 
     end
 
 end
