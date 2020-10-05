@@ -1,3 +1,5 @@
+rando = Random.new # call a new with rando.rand(99)
+
 PLAYERS = [
     ["D’Marcus Williums", "University of Georgia"],
     ["T.J. Juckson", "Wayne State University"],
@@ -116,8 +118,6 @@ PLAYERS.each.with_index do |player, i|
     })
 end
 
-rando = Random.new # call a new with rando.rand(99)
-
 LEAGUE_MEMBERS = [
     {name: "Taco", username: "taco", password: "thepasswordistaco", ssn: rando.rand(99)},
     {name: "Jenny", username: "jenny", password: "beanflick", ssn: rando.rand(99)},
@@ -152,6 +152,14 @@ TEAMS = [
     {name: "Trump Dolphins", logo: "/logos/trump_dolphins.jpeg"}
 ]
 
-TEAMS.each do |team|
-    Team.create(team)
+LOCATIONS = ["Gotham", "Gondor", "Rohan", "Metropolis", "Win Angeles", "Vice City", "Hogwarts", "Whoville"]
+
+TEAMS.each.with_index do |team, i|
+    new_team = Team.new(team)
+    if i < LOCATIONS.length
+        new_team.location = LOCATIONS[i]
+        new_team.user_id = i + 1
+    end
+    new_team.save
 end
+
