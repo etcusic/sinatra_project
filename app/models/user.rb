@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
-
-    has_many :players, through: :team
+    has_secure_password
     
-    # has_secure_password
+    has_many :teams 
+    has_many :players, through: :team 
     
 end
