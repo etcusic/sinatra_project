@@ -1,6 +1,8 @@
 class TeamsController < ApplicationController
 
-    get '/teams'do
+    get '/teams' do
+        @users = User.all
+        @teams = Team.all
         erb :"teams/index"
     end
 
@@ -9,6 +11,7 @@ class TeamsController < ApplicationController
     end
 
     get '/teams/:id' do
+        @team = Team.find_by_id(params[:id])
         erb :"teams/show"
     end
 
