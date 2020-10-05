@@ -1,27 +1,10 @@
 class UsersController < ApplicationController
-  
-    get '/users' do
-        # show all users / teams
-        @users = User.all
-        erb :'users/index'
-    end
 
     get '/signup' do
         erb :"users/new"
     end
     
-    get '/users/:id' do
-        # binding.pry
-        @user = User.find_by_id(params[:id])
-        erb :"users/show"
-    end
-
-    get '/users/:id/edit' do
-        erb :"users/edit"
-    end
-
     post '/users' do
-        # binding.pry
         @user = User.new(params)
         # revisit to see if refactoring would be good
         if @user && @user.save
@@ -33,8 +16,31 @@ class UsersController < ApplicationController
         end
     end
 
+    get '/users/:id' do
+        @user = User.find_by_id(params[:id])
+        @user_teams = Team.all.select{|team| team.user_id == @user.id}
+        erb :"users/show"
+    end
+
+    get '/users/:id/edit' do
+        @user = User.find(params[:id])
+        erb :"users/edit"
+    end
+
     patch "/users/:id/edit" do
-        @user = User.find(id: params[:id])
+        @user = User.find_by_id(params[:id])
+        if @user.id
+            @user.update(
+                name: params[:name],
+                username: params[:username],
+                password: params[:password],
+                photo_url: params[:photo_url],
+                ssn: params[:ssn],
+                credit_card_info: params[:credit_card_info],
+                deepest_darkest_secret: params[:deepest_darkest_secret],
+                what_you_want_for_christmas: params[:what_you_want_for_christmas]
+            )
+        end
         redirect "/users/#{@user.id}"
     end
 
