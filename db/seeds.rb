@@ -1,4 +1,4 @@
-rando = Random.new # call a new with rando.rand(99)
+#rando = Random.new # call a new with rando.rand(99)
 
 PLAYERS = [
     ["D’Marcus Williums", "University of Georgia"],
@@ -99,11 +99,11 @@ PLAYERS = [
 ]
 
 def assign_position(i)
-    if i >= 0 || i <= 11
+    if i >= 0 && i <= 15
         "QB"
-    elsif i >= 12 || i <= 23
+    elsif i >= 16 && i <= 31
         "K"
-    elsif i >= 24 || i <= 58
+    elsif i >= 32 && i <= 61
         "RB"
     else
         "WR"
@@ -112,6 +112,7 @@ end
 
 PLAYERS.each.with_index do |player, i|
     Player.create({
+        id: (i + 1),
         name: player[0],
         school: player[1],
         position: assign_position(i)

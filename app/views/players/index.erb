@@ -1,11 +1,15 @@
 <h1>PLAYERS</h1>
 
 <table>
-    <tr><th>Name:</th><th>School:</th></tr>
+    <tr><th>Pos:</th><th>Name:</th><th>School:</th></tr>
     <% @players.each do |player| %>
-        <tr><%= @player.name %></tr>
-        <tr><%= @player.school %></tr>
+    <tr>
+        <td> <%= player.position %></td>
+        <td> <%= player.name %></td>
+        <td> <%= player.school %></td>
+    </tr>
     <% end %>
 </table>
 
 <h3><a href="https://www.youtube.com/watch?v=gRhB2Oiy0Nc">Meet the players!</a></h3><br><br>
+

@@ -3,10 +3,9 @@
     <% if team.owner %>
         <h3>
             <a href="/teams/<%= team.id %>"><%= team.location %> <%= team.name %></a> - 
-            <a href="/users/<%= team.owner.id %>"><%= team.owner.name %></a>
+            <a href="/users/<%= team.user_id %>"><%= team.owner.name %></a>
         </h3>
     <% end %>
 <% end %><br><br>
 
 <button><a href="/players">List of players</a></button>
-<%# <h3><a href="/players">List of players</a></h3><br><br> %>

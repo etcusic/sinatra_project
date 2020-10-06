@@ -5,6 +5,8 @@ require './config/environment'
 # end
 
 use Rack::MethodOverride
+use ErrorsController
+use PlayersController
 use SessionsController
 use UsersController
 use TeamsController

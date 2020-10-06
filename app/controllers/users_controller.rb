@@ -5,7 +5,7 @@ class UsersController < ApplicationController
         if logged_in?
             redirect "/users/#{session[:user_id]}"
         else
-            erb :"users/new"
+            erb :"users/signup"
         end
     end
     
@@ -20,24 +20,29 @@ class UsersController < ApplicationController
         end
     end
 
-    get '/users/:id' do 
-        @user = User.find_by_id(session[:user_id])
-        @user_teams = Team.all.select{|team| team.user_id == @user.id}
+    get '/users/:id' do     
+            @user = User.find_by_id(params[:id])
+            @user_teams = Team.all.select{|team| team.user_id == @user.id}
         # 2 different views for if user page doesn't match logged in user
-        if params[:id] == session[:id] 
-            erb :"users/show" 
+        if not_users_stuff?   #params[:id].to_i == session[:user_id]  
+            @not_user = User.find_by_id(session[:user_id])
+            erb :"nachos/nacho_page"
         else
-            erb :"users/nacho_page"
+            erb :"users/show"
         end
     end
 
     get '/users/:id/edit' do
-        # Must stop intruders!!!
-        @user = User.find(params[:id])
-        erb :"users/edit"
+        if not_users_stuff?  
+            erb :"nachos/cleaver"
+        else
+            @user = User.find(params[:id])
+            erb :"users/edit"
+        end
     end
 
     patch "/users/:id" do
+        # warn user of updating 
         @user = User.find_by_id(params[:id])
         if @user.id
             @user.update(

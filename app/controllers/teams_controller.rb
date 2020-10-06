@@ -16,7 +16,6 @@ class TeamsController < ApplicationController
     end
 
     post '/teams' do
-        binding.pry
         #REDIRECT NEW TEAM TO FILL OUT ROSTER
         #ERROR IF TRY TO SELECT MORE THAN ONE TEAM (DROP DOWN SELECTOR?)
         if params[:button] == "Create New"
@@ -30,7 +29,7 @@ class TeamsController < ApplicationController
             team.location = params[:location]
             team.slogan = params[:slogan]
             team.save
-            redirect "/teams/#{team.id}"
+            redirect "/add_players"
         # need to develop error message/page to handle someone selecting multiple teams
         # else
         #     redirect "/errors"
@@ -38,19 +37,24 @@ class TeamsController < ApplicationController
     end
 
     get '/teams/:id' do
+        # verify it is user's team
         @team = Team.find_by_id(params[:id])
         erb :"teams/show"
     end
 
     get '/teams/:id/edit' do
         @team = Team.find(params[:id])
-        erb :"teams/edit"
+        if not_users_stuff?
+            erb :"nachos/cleaver"
+        else
+            erb :"teams/edit"
+        end
     end
 
     patch '/teams/:id' do
         @team = Team.find(params[:id])
         #needs verification!
-        if team
+        if @team
             @team.update(
                 name: params[:name],
                 location: params[:location],
