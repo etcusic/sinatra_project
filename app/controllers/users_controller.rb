@@ -1,33 +1,43 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-        erb :"users/new"
+        # error message if already logged in??
+        if logged_in?
+            redirect "/users/#{session[:user_id]}"
+        else
+            erb :"users/new"
+        end
     end
     
     post '/users' do
         @user = User.new(params)
-        # revisit to see if refactoring would be good
         if @user && @user.save
             session[:user_id] = @user.id
             redirect "/users/#{@user.id}"
+        else
         # need to build out error page for redirection
-        # else
-            # redirect '/error'
+            redirect '/signup'
         end
     end
 
-    get '/users/:id' do
-        @user = User.find_by_id(params[:id])
+    get '/users/:id' do 
+        @user = User.find_by_id(session[:user_id])
         @user_teams = Team.all.select{|team| team.user_id == @user.id}
-        erb :"users/show"
+        # 2 different views for if user page doesn't match logged in user
+        if params[:id] == session[:id] 
+            erb :"users/show" 
+        else
+            erb :"users/nacho_page"
+        end
     end
 
     get '/users/:id/edit' do
+        # Must stop intruders!!!
         @user = User.find(params[:id])
         erb :"users/edit"
     end
 
-    patch "/users/:id/edit" do
+    patch "/users/:id" do
         @user = User.find_by_id(params[:id])
         if @user.id
             @user.update(
@@ -44,10 +54,11 @@ class UsersController < ApplicationController
         redirect "/users/#{@user.id}"
     end
 
-    delete "/users/:id/delete" do
+    delete "/users/:id" do
         @user = User.find(params[:id])
         @user.delete
         redirect "/"
     end
 
 end
+

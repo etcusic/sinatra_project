@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :sessions, true  
-    set :session_secret, "secret"  # what about environment variable?
+    set :session_secret, "secret"  # what about environment variable? 
   end
 
   get "/" do
