@@ -1,0 +1,20 @@
+<h1>Edit <%= @team.name %></h1>
+
+<form method="POST" action="/teams/<%= @team.id %>/edit">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    
+    <label>Location: <input type="text" name="location" value="<%= @team.location %>"></label><br><br>
+    <label>Team Name: <input type="text" name="name" value="<%= @team.name %>"></label><br><br>
+    <label>Slogan: <input type="text" name="slogan" value="<%= @team.slogan %>"></label><br><br>
+    <%# <label>Logo: <input type="text" name="photo_url"></label><br><br> %>
+
+    <input type="submit" value="Submit Edits"><br><br>
+</form>
+
+<h3>-- OR --</h3>
+    
+<form method="POST" action="/teams/<%= @team.id %>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Team">
+</form>
+<br><br>

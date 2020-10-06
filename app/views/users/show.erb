@@ -1,3 +1,5 @@
+<%# SHOW A DIFFERENT VIEW IF SESSION_ID DOES NOT MATCH USERS/:ID %>
+
 <h1>Welcome to your homepage <%= @user.name %>!</h1>
 <br>
 
@@ -12,4 +14,7 @@
 
 <h3>-- OR --</h3>
 <a href="/users/<%= @user.id %>/edit"><button>Edit Info</button></a>
+
+<h3>-- OR --</h3>
+<a href="/logout"><button>Logout</button></a>
 <br><br>

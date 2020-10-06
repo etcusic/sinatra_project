@@ -1,6 +1,6 @@
 <h1>Edit yo stuff here!</h1>
 
-<form method="POST" action="/users/<%= @user.id %>/edit">
+<form method="POST" action="/users/<%= @user.id %>">
     <input id="hidden" type="hidden" name="_method" value="PATCH">
     
     <label>Full Name: </label>
@@ -33,7 +33,7 @@
 
 <h3>-- OR --</h3>
     
-<form method="POST" action="/users/<%= @user.id %>/delete">
+<form method="POST" action="/users/<%= @user.id %>">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete Profile :(">
 </form>
