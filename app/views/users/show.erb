@@ -1,5 +1,6 @@
 <%# SHOW A DIFFERENT VIEW IF SESSION_ID DOES NOT MATCH USERS/:ID %>
 
+<img class="logo" src="<%= @user.photo_url %>" alt="user photo">
 <h1>Welcome to your homepage <%= @user.name %>!</h1>
 <br>
 
@@ -18,3 +19,5 @@
 <h3>-- OR --</h3>
 <a href="/logout"><button>Logout</button></a>
 <br><br>
+
+<%# User.find(2).photo_url = "/seed_user_photos/jenny.jpg" %>

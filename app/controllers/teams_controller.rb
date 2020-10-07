@@ -39,7 +39,11 @@ class TeamsController < ApplicationController
     get '/teams/:id' do
         # verify it is user's team
         @team = Team.find_by_id(params[:id])
-        erb :"teams/show"
+        if @team.user_id == session[:user_id]
+            erb :"teams/show"
+        else
+            erb :"nachos/nacho_team"
+        end
     end
 
     get '/teams/:id/edit' do

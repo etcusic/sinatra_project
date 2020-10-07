@@ -1,5 +1,7 @@
 NOTES
 
+Desktop/Coding_Projects/Ruby/projects/flatiron_project2/sinatra_project
+
 Areas to review/improve:
 - Interact with DB via the command line and rake
 - Use tux to test our app 
@@ -11,6 +13,7 @@ Areas to review/improve:
 - CRUD architecture in Controllers
 - What are RESTful routes => Respresentation State Transfer (convention of file/route structure)
 - Actively change Class attributes with Active Record methods (ID problem)
+- Seed users using faker
 
 - Nested Forms?
 
@@ -31,6 +34,8 @@ TESTING:
 [] Simplify code with class/instance methods
 [] Schema - teams_table => logo / logo_url
 [] Create new players
+[] Nothing unused in Files - config.ru, Rakefile, etc
+[] delete tables and reseed seeds.rb (without id assignment)
 
 ERROR MESSAGES:
 [] Sign up when already logged in

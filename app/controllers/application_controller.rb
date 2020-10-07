@@ -8,10 +8,11 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     enable :sessions
     set :sessions, true  
-    set :session_secret, "secret"  # what about environment variable? 
+    set :session_secret, ENV["SECRET"]  # environment variable 
   end
 
   get "/" do
+    @landing_page = "Landing Page"
     erb :the_league
   end
 

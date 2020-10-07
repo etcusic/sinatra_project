@@ -1,4 +1,36 @@
-#rando = Random.new # call a new with rando.rand(99)
+rando = Random.new # call a new with rando.rand(99)
+
+LEAGUE_MEMBERS = [
+    {name: "Taco", username: "taco", password: "thepasswordistaco", photo_url: "/seed_user_photos/taco.jpg", ssn: rando.rand(99)},
+    {name: "Jenny", username: "jenny", password: "beanflick", photo_url: "/seed_user_photos/jenny.jpg", ssn: rando.rand(99)},
+    {name: "Pete", username: "pete", password: "itisdecided", photo_url: "/seed_user_photos/pete.jpg", ssn: rando.rand(99)},
+    {name: "Kevin", username: "kevin", password: "yobogoya", photo_url: "/seed_user_photos/kevin.jpg", ssn: rando.rand(99)},
+    {name: "Rafi", username: "rafi", password: "rafibomb", photo_url: "/seed_user_photos/rafi.jpg", ssn: rando.rand(99)},
+    {name: "Ruxin", username: "ruxin", password: "collusion", photo_url: "/seed_user_photos/ruxin.jpg", ssn: rando.rand(99)},
+    {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", photo_url: "/seed_user_photos/mr_mcgibblets.jpg", ssn: rando.rand(99)},
+    {name: "Dirty Randy", username: "dirty_randy", password: "dildos", photo_url: "/seed_user_photos/dirty_randy.jpg", ssn: rando.rand(99)}
+]
+
+TEAMS = [
+    {name: "Buffalo Wings", logo: "/logos/buffalo_wings.jpg"},
+    {name: "Buggery Bandits", logo: "/logos/buggery_bandits.png"},
+    {name: "Cheetos", logo: "/logos/cheetos.jpeg"},
+    {name: "Cowardly Lions", logo: "/logos/cowardly_lions.jpeg"},
+    {name: "Dandy Fishies", logo: "/logos/dandy_fishies.png"},
+    {name: "Grumpy Cats", logo: "/logos/grumpy_cats.png"},
+    {name: "Heismanbergs", logo: "/logos/heismanberger.jpg"},
+    {name: "Sad Frogs", logo: "/sad_frogs.jpeg"},
+    {name: "Nordic Hipsters", logo: "/nordic_hipsters.jpeg"},
+    {name: "Karens", logo: "/logos/karens.jpg"},
+    {name: "Prancy Horsies", logo: "/logos/prancy_horsies.png"},
+    {name: "Punch Lines", logo: "/logos/punch_lines.png"},
+    {name: "Silly Pussies", logo: "/logos/silly_pussies.png"},
+    {name: "Sith Lords", logo: "/logos/sith_lords.jpg"},
+    {name: "Trophy Pelts", logo: "/logos/trophy_pelts.jpeg"},
+    {name: "Trump Dolphins", logo: "/logos/trump_dolphins.jpeg"}
+]
+
+LOCATIONS = ["Gotham", "Gondor", "Rohan", "Metropolis", "Win Angeles", "Vice City", "Hogwarts", "Whoville"]
 
 PLAYERS = [
     ["D’Marcus Williums", "University of Georgia"],
@@ -98,65 +130,18 @@ PLAYERS = [
     ["A.A. Ron Rodgers", "Cal"]
 ]
 
-def assign_position(i)
-    if i >= 0 && i <= 15
-        "QB"
-    elsif i >= 16 && i <= 31
-        "K"
-    elsif i >= 32 && i <= 61
-        "RB"
-    else
-        "WR"
-    end
+
+# SEED USERS
+LEAGUE_MEMBERS.each.with_index do |user, i|
+    new_user = User.new(user)
+    new_user.id = i + 1
+    new_user.save
 end
 
-PLAYERS.each.with_index do |player, i|
-    Player.create({
-        id: (i + 1),
-        name: player[0],
-        school: player[1],
-        position: assign_position(i)
-    })
-end
-
-LEAGUE_MEMBERS = [
-    {name: "Taco", username: "taco", password: "thepasswordistaco", ssn: rando.rand(99)},
-    {name: "Jenny", username: "jenny", password: "beanflick", ssn: rando.rand(99)},
-    {name: "Pete", username: "pete", password: "itisdecided", ssn: rando.rand(99)},
-    {name: "Kevin", username: "kevin", password: "yobogoya", ssn: rando.rand(99)},
-    {name: "Rafi", username: "rafi", password: "rafibomb", ssn: rando.rand(99)},
-    {name: "Ruxin", username: "ruxin", password: "collusion", ssn: rando.rand(99)},
-    {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", ssn: rando.rand(99)},
-    {name: "Dirty Randy", username: "dirty_randy", password: "dildos", ssn: rando.rand(99)}
-]
-
-LEAGUE_MEMBERS.each do |user|
-    User.create(user)
-end
-
-
-TEAMS = [
-    {name: "Buffalo Wings", logo: "/logos/buffalo_wings.jpg"},
-    {name: "Buggery Bandits", logo: "/logos/buggery_bandits.png"},
-    {name: "Cheetos", logo: "/logos/cheetos.jpeg"},
-    {name: "Cowardly Lions", logo: "/logos/cowardly_lions.jpeg"},
-    {name: "Dandy Fishies", logo: "/logos/dandy_fishies.png"},
-    {name: "Grumpy Cats", logo: "/logos/grumpy_cats.png"},
-    {name: "Heismanbergs", logo: "/logos/heismanbergs.png"},
-    {name: "Hipster Kitties", logo: "/logos/hipster_kitties.jpg"},
-    {name: "Karens", logo: "/logos/karens.jpg"},
-    {name: "Prancy Horsies", logo: "/logos/prancy_horsies.png"},
-    {name: "Punch Lines", logo: "/logos/punch_lines.png"},
-    {name: "Silly Pussies", logo: "/logos/silly_pussies.png"},
-    {name: "Sith Lords", logo: "/logos/sith_lords.jpg"},
-    {name: "Trophy Pelts", logo: "/logos/trophy_pelts.jpeg"},
-    {name: "Trump Dolphins", logo: "/logos/trump_dolphins.jpeg"}
-]
-
-LOCATIONS = ["Gotham", "Gondor", "Rohan", "Metropolis", "Win Angeles", "Vice City", "Hogwarts", "Whoville"]
-
+# SEED TEAMS
 TEAMS.each.with_index do |team, i|
     new_team = Team.new(team)
+    new_team.id = i + 1
     if i < LOCATIONS.length
         new_team.location = LOCATIONS[i]
         new_team.user_id = i + 1
@@ -164,3 +149,29 @@ TEAMS.each.with_index do |team, i|
     new_team.save
 end
 
+# HELPERS FOR SEED PLAYERS
+qbs = PLAYERS[0..15].map.with_index {|array, i| array << "QB" ; array << (i + 1)}
+kickers = PLAYERS[16..31].map.with_index {|array, i| array << "K" ; array << (i + 17)}
+rbs = PLAYERS[32..61].map.with_index {|array, i| array << "RB" ; array << (i + 33)}
+wrs = PLAYERS[62..94].map.with_index {|array, i| array << "WR" ; array << (i + 63)}
+
+ARRAY = [qbs, kickers, rbs, wrs]
+
+# SEED PLAYERS AND ADD TEAM_ID
+ARRAY.each do |array|
+    array.each.with_index do |arr, i|
+        player = Player.create({
+            id: arr[3],
+            name: arr[0],
+            school: arr[1],
+            position: arr[2]
+        })
+        if i < 8
+            player.team_id = i + 1
+        elsif player.position == "RB" || player.position == "WR"
+            i > 8 && i < 17 ? player.team_id = i - 8 : player.team_id = nil
+        end
+
+        player.save
+    end
+end
