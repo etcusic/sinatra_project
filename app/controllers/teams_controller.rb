@@ -10,34 +10,41 @@ class TeamsController < ApplicationController
         # user = User.find(session[:user_id])
         # if user.maximum_number_of_teams?
         #    redirect '/errors/ - max number of teams ' 
-
         @available_teams = Team.all.select{|team| !team.user_id}
         erb :"teams/new"
     end
 
-    post '/teams' do
-        #REDIRECT NEW TEAM TO FILL OUT ROSTER
-        #ERROR IF TRY TO SELECT MORE THAN ONE TEAM (DROP DOWN SELECTOR?)
-        if params[:button] == "Create New"
-            new_team = Team.new(params)
-            new_team.user_id = session[:user_id]
-            new_team.save
-            redirect "/teams/#{new_team.id}"
-        else # params[:button] == "Submit"
-            team = Team.find(params.keys[0])
-            team.user_id = session[:user_id]
-            team.location = params[:location]
-            team.slogan = params[:slogan]
-            team.save
-            redirect "/add_players"
-        # need to develop error message/page to handle someone selecting multiple teams
-        # else
-        #     redirect "/errors"
-        end
+    post '/teams/new' do
+        # CHECK IF NO TEAM WAS SUBMITTED
+        # CHECK IF PLAYER HAS MAX AMOUNT OF TEAMS!!!
+        @team = Team.find(params.keys[0])
+        @team.user_id = session[:user_id]
+        @team.location = params[:location]
+        @team.slogan = params[:slogan]
+        @team.save
+        # erb :"players/add_players"
+        redirect "/teams/#{ @team.id }"
+    end
+
+    get '/teams/new_from_scratch' do
+        erb :"teams/new_from_scratch"
+    end
+
+    post '/teams/new_from_scratch' do
+        # CHECK IF NO TEAM WAS SUBMITTED
+        # CHECK IF PLAYER HAS MAX AMOUNT OF TEAMS!!!
+        binding.pry
+        @team = Team.create(params)
+        @team.user_id = session[:user_id]
+        @team.id = Team.all.length + 1
+        @team.save
+        # erb :"players/add_players"
+        redirect "/teams/#{ @team.id }"
     end
 
     get '/teams/:id' do
         # verify it is user's team
+        # binding.pry
         @team = Team.find_by_id(params[:id])
         if @team.user_id == session[:user_id]
             erb :"teams/show"
@@ -49,7 +56,7 @@ class TeamsController < ApplicationController
     get '/teams/:id/edit' do
         @team = Team.find(params[:id])
         if not_users_stuff?
-            erb :"nachos/cleaver"
+            erb :"nachos/nacho_stuff"
         else
             erb :"teams/edit"
         end

@@ -1,7 +1,7 @@
-<h1>PLAYERS</h1>
+<h1>ALL PLAYERS</h1>
 
 <table>
-    <tr><th>Pos:</th><th>Name:</th><th>School:</th></tr>
+    <strong><tr><th class="table-header">Position</th><th>Full Name</th><th>School</th></tr></strong>
     <% @players.each do |player| %>
     <tr>
         <td> <%= player.position %></td>
@@ -9,7 +9,7 @@
         <td> <%= player.school %></td>
     </tr>
     <% end %>
-</table>
+</table><br>
 
 <h3><a href="https://www.youtube.com/watch?v=gRhB2Oiy0Nc">Meet the players!</a></h3><br><br>
 

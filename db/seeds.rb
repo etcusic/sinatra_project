@@ -1,3 +1,5 @@
+# Need to add available boolean to players (if !team_id)
+
 rando = Random.new # call a new with rando.rand(99)
 
 LEAGUE_MEMBERS = [
@@ -18,7 +20,7 @@ TEAMS = [
     {name: "Cowardly Lions", logo: "/logos/cowardly_lions.jpeg"},
     {name: "Dandy Fishies", logo: "/logos/dandy_fishies.png"},
     {name: "Grumpy Cats", logo: "/logos/grumpy_cats.png"},
-    {name: "Heismanbergs", logo: "/logos/heismanberger.jpg"},
+    {name: "Heismanbergs", logo: "/logos/heismanbergs.jpg"},
     {name: "Sad Frogs", logo: "/sad_frogs.jpeg"},
     {name: "Nordic Hipsters", logo: "/nordic_hipsters.jpeg"},
     {name: "Karens", logo: "/logos/karens.jpg"},

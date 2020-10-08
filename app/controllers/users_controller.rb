@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-        # error message if already logged in??
         if logged_in?
             redirect "/users/#{session[:user_id]}"
         else
@@ -10,13 +9,13 @@ class UsersController < ApplicationController
     end
     
     post '/users' do
+        # CHECK FOR VALID INPUTS AND REDIRECT TO SIGNUP ERROR PAGE
         @user = User.new(params)
         if @user && @user.save
             session[:user_id] = @user.id
             redirect "/users/#{@user.id}"
         else
-        # need to build out error page for redirection
-            redirect '/signup'
+            redirect '/signup_error'
         end
     end
 
@@ -34,7 +33,7 @@ class UsersController < ApplicationController
 
     get '/users/:id/edit' do
         if not_users_stuff?  
-            erb :"nachos/cleaver"
+            erb :"nachos/nacho_stuff"
         else
             @user = User.find(params[:id])
             erb :"users/edit"
@@ -43,8 +42,9 @@ class UsersController < ApplicationController
 
     patch "/users/:id" do
         # warn user of updating 
+        binding.pry
         @user = User.find_by_id(params[:id])
-        if @user.id
+        if @user.id && params[:edit_button] 
             @user.update(
                 name: params[:name],
                 username: params[:username],
@@ -55,8 +55,12 @@ class UsersController < ApplicationController
                 deepest_darkest_secret: params[:deepest_darkest_secret],
                 what_you_want_for_christmas: params[:what_you_want_for_christmas]
             )
+            redirect "/users/#{@user.id}"
+        elsif params[:delete_button]
+            redirect "/delete?"
+        else
+            redirect "/users/#{@user.id}"
         end
-        redirect "/users/#{@user.id}"
     end
 
     delete "/users/:id" do

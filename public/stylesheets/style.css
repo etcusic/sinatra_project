@@ -29,3 +29,25 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+#user-edit-options {
+    display: inline-block;
+}
+
+.table-header {
+    text-align: left;
+}
+
+.position-group {
+    text-align: left;
+    width: 150px;
+}
+
+.add-drop-players {
+    text-align: left;
+    width: 600px;
+}
+
+.center-page {
+    text-align: center;
+}
