@@ -5,19 +5,21 @@
 <br>
 
 <h2><%= @user.name %> teams:</h2>
-<% @user_teams.each do |team| %>
-    <a href="/teams/<%= team.id %>"><h3><%= team.location %> <%= team.name %></h3></a>
-<% end %>
+<ul>
+    <% @user_teams.each do |team| %>
+        <li><a href="/teams/<%= team.id %>"><h3><%= team.location %> <%= team.name %></h3></a></li>
+    <% end %>
+</ul>
 <br><br>
 
-<h3>Create new team here:</h3> 
-<a href="/teams/new"><button>Create</button></a>
-
-<h3>-- OR --</h3>
-<a href="/users/<%= @user.id %>/edit"><button>Edit Info</button></a>
-
-<h3>-- OR --</h3>
-<a href="/logout"><button>Logout</button></a>
+<div id="user-edit-options">
+    <h3>Create new team here:  <a href="/teams/new"><button>Create</button></a>
+    -- OR --
+    <a href="/users/<%= @user.id %>/edit"><button>Edit Profile</button></a>
+    -- OR --
+    <a href="/logout"><button>Logout</button></a>
+    </h3>
+</div>
 <br><br>
 
 <%# User.find(2).photo_url = "/seed_user_photos/jenny.jpg" %>
