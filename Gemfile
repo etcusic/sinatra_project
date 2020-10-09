@@ -12,6 +12,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'env'
+gem 'faker'
 
 group :test do
   gem 'rspec'

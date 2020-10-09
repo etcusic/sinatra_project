@@ -10,25 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_03_194831) do
+ActiveRecord::Schema.define(version: 2020_10_08_194630) do
 
   create_table "players", force: :cascade do |t|
     t.string "name"
     t.string "school"
     t.string "position"
+    t.boolean "available"
     t.integer "team_id"
-    t.boolean "active"
   end
 
   create_table "teams", force: :cascade do |t|
     t.string "name"
     t.string "location"
     t.string "slogan"
-    t.string "logo_url"
+    t.string "logo"
     t.integer "wins"
     t.integer "losses"
     t.integer "user_id"
-    t.string "logo"
   end
 
   create_table "users", force: :cascade do |t|

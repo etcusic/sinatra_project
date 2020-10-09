@@ -1,16 +1,14 @@
-# Need to add available boolean to players (if !team_id)
-
-rando = Random.new # call a new with rando.rand(99)
+#CURRENTLY DOES NOT ATTRIBUTE A USER_ID TO ANY SEED TEAMS
 
 LEAGUE_MEMBERS = [
-    {name: "Taco", username: "taco", password: "thepasswordistaco", photo_url: "/seed_user_photos/taco.jpg", ssn: rando.rand(99)},
-    {name: "Jenny", username: "jenny", password: "beanflick", photo_url: "/seed_user_photos/jenny.jpg", ssn: rando.rand(99)},
-    {name: "Pete", username: "pete", password: "itisdecided", photo_url: "/seed_user_photos/pete.jpg", ssn: rando.rand(99)},
-    {name: "Kevin", username: "kevin", password: "yobogoya", photo_url: "/seed_user_photos/kevin.jpg", ssn: rando.rand(99)},
-    {name: "Rafi", username: "rafi", password: "rafibomb", photo_url: "/seed_user_photos/rafi.jpg", ssn: rando.rand(99)},
-    {name: "Ruxin", username: "ruxin", password: "collusion", photo_url: "/seed_user_photos/ruxin.jpg", ssn: rando.rand(99)},
-    {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", photo_url: "/seed_user_photos/mr_mcgibblets.jpg", ssn: rando.rand(99)},
-    {name: "Dirty Randy", username: "dirty_randy", password: "dildos", photo_url: "/seed_user_photos/dirty_randy.jpg", ssn: rando.rand(99)}
+    {name: "Taco", username: "taco", password: "thepasswordistaco", photo_url: "/seed_user_photos/taco.jpg"},
+    {name: "Jenny", username: "jenny", password: "beanflick", photo_url: "/seed_user_photos/jenny.jpg"},
+    {name: "Pete", username: "pete", password: "itisdecided", photo_url: "/seed_user_photos/pete.jpg"},
+    {name: "Kevin", username: "kevin", password: "yobogoya", photo_url: "/seed_user_photos/kevin.jpg"},
+    {name: "Rafi", username: "rafi", password: "rafibomb", photo_url: "/seed_user_photos/rafi.jpg"},
+    {name: "Ruxin", username: "ruxin", password: "collusion", photo_url: "/seed_user_photos/ruxin.jpg"},
+    {name: "Mr McGibblets", username: "mr_mcgibblets", password: "ticklemeandrubmybelly", photo_url: "/seed_user_photos/mr_mcgibblets.jpg"},
+    {name: "Dirty Randy", username: "dirty_randy", password: "dildos", photo_url: "/seed_user_photos/dirty_randy.jpg"}
 ]
 
 TEAMS = [
@@ -31,8 +29,6 @@ TEAMS = [
     {name: "Trophy Pelts", logo: "/logos/trophy_pelts.jpeg"},
     {name: "Trump Dolphins", logo: "/logos/trump_dolphins.jpeg"}
 ]
-
-LOCATIONS = ["Gotham", "Gondor", "Rohan", "Metropolis", "Win Angeles", "Vice City", "Hogwarts", "Whoville"]
 
 PLAYERS = [
     ["D’Marcus Williums", "University of Georgia"],
@@ -134,46 +130,43 @@ PLAYERS = [
 
 
 # SEED USERS
-LEAGUE_MEMBERS.each.with_index do |user, i|
-    new_user = User.new(user)
-    new_user.id = i + 1
-    new_user.save
+LEAGUE_MEMBERS.each do |user|
+    new_user = User.create(user)
+    new_user.update(
+        ssn: Faker::Number.number(digits: 2),
+        credit_card_info: Faker::Number.number(digits: 3),
+        deepest_darkest_secret: Faker::Quotes::Shakespeare.king_richard_iii_quote,
+        what_you_want_for_christmas: Faker::Appliance.equipment
+    )
 end
 
 # SEED TEAMS
-TEAMS.each.with_index do |team, i|
-    new_team = Team.new(team)
-    new_team.id = i + 1
-    if i < LOCATIONS.length
-        new_team.location = LOCATIONS[i]
-        new_team.user_id = i + 1
-    end
-    new_team.save
+TEAMS.each.with_index do |team|   
+    new_team = Team.create(team)
+    new_team.update(location: Faker::Nation.capital_city, slogan: Faker::Movie.quote)
+    new_team
 end
 
 # HELPERS FOR SEED PLAYERS
-qbs = PLAYERS[0..15].map.with_index {|array, i| array << "QB" ; array << (i + 1)}
-kickers = PLAYERS[16..31].map.with_index {|array, i| array << "K" ; array << (i + 17)}
-rbs = PLAYERS[32..61].map.with_index {|array, i| array << "RB" ; array << (i + 33)}
-wrs = PLAYERS[62..94].map.with_index {|array, i| array << "WR" ; array << (i + 63)}
+qbs = PLAYERS[0..18].map {|array| array << "QB"}
+rbs = PLAYERS[19..37].map {|array| array << "RB"}
+wrs = PLAYERS[38..56].map {|array| array << "WR"}
+tes = PLAYERS[57..75].map {|array| array << "TE"}
+kickers = PLAYERS[76..].map {|array| array << "K"}
 
-ARRAY = [qbs, kickers, rbs, wrs]
+ARRAY = [qbs, rbs, wrs, tes, kickers]
 
-# SEED PLAYERS AND ADD TEAM_ID
+# SEED PLAYERS WITH POSITIONS AND ADD TEAM_ID
 ARRAY.each do |array|
     array.each.with_index do |arr, i|
         player = Player.create({
-            id: arr[3],
             name: arr[0],
             school: arr[1],
             position: arr[2]
         })
         if i < 8
-            player.team_id = i + 1
-        elsif player.position == "RB" || player.position == "WR"
-            i > 8 && i < 17 ? player.team_id = i - 8 : player.team_id = nil
+           player.update(team_id: i + 1)
         end
-
-        player.save
+        player
     end
 end

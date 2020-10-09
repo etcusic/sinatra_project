@@ -51,6 +51,8 @@ GEM
     diff-lcs (1.4.4)
     env (0.3.0)
     eventmachine (1.2.7)
+    faker (2.14.0)
+      i18n (>= 1.6, < 2)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
@@ -127,6 +129,7 @@ DEPENDENCIES
   capybara
   database_cleaner!
   env
+  faker
   pry
   rack-test
   rake
